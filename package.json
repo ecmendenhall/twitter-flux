@@ -1,0 +1,21 @@
+{
+  "name": "twitter-flux",
+  "version": "0.0.1",
+  "description": "Building a Twitter client to learn Flux",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "build": "./node_modules/.bin/webpack"
+  },
+  "devDependencies": {
+    "babel": "^6.3.26",
+    "babel-core": "^6.4.0",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "electron-prebuilt": "^0.36.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "webpack": "^1.12.10"
+  }
+}
