@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.js$/,
+        test: /.jsx?$/,
         loader: 'babel',
         exclude: /node_modules/,
         query: {
@@ -23,10 +23,15 @@ module.exports = {
       {
         test: /\.json$/,
         loader: 'json-loader'
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   },
   resolve: {
+    extensions: ['', '.js', '.jsx'],
     root: path.resolve('.')
   }
 }

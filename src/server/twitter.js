@@ -10,4 +10,8 @@ export class Twitter {
       access_token_secret: config.access_token_secret
     });
   }
+
+  getTimeline(callback) {
+    this.client.get('statuses/home_timeline', {}, callback)
+  }
 }
