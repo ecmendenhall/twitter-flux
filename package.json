@@ -40,7 +40,9 @@
     "babel-polyfill": "^6.3.14",
     "babel-register": "^6.3.13",
     "express": "^4.13.3",
+    "react-tools": "^0.13.3",
     "then-request": "^2.1.1",
-    "twit": "^2.1.1"
+    "twit": "^2.1.1",
+    "twitter-text": "^1.13.2"
   }
 }

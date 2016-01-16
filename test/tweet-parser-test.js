@@ -1,34 +1,20 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import { TweetParser } from '../src/client/tweet-parser';
+import { FormatTweetEntities } from '../src/client/format-tweet-entities';
 
-describe('TweetParser', () => {
+describe('FormatTweetEntities', () => {
 
-  it('has an entities object', () => {
-    let entities = {}
-    let parser = new TweetParser(entities)
-    expect(parser.tweetEntities).to.eql(entities);
+  it('formats tweet URLs', () => {
+    let text = "Today, Twitter is updating embedded Tweets to enable a richer photo experience: https:\/\/t.co\/XdXRudPXH5"
+    let transformedText = 'Today, Twitter is updating embedded Tweets to enable a richer photo experience: <a href="https://t.co/XdXRudPXH5" rel="nofollow">https:\/\/t.co\/XdXRudPXH5</a>'
+    expect(FormatTweetEntities.call(text)).to.eq(transformedText);
   });
-
-  it('parses URLs', () => {
-    let entities = {
-      "text": "Today, Twitter is updating embedded Tweets to enable a richer photo experience: https:\/\/t.co\/XdXRudPXH5",
-      "entities": {
-        "hashtags": [],
-        "symbols": [],
-        "urls": [{
-          "url": "https:\/\/t.co\/XdXRudPXH5",
-          "expanded_url": "https:\/\/blog.twitter.com\/2013\/rich-photo-experience-now-in-embedded-tweets-3",
-          "display_url": "blog.twitter.com\/2013\/rich-phot\u2026",
-          "indices": [80, 103]
-        }],
-        "user_mentions": []
-      }
-    }
-    let parser = new TweetParser(entities);
-    let parsedBody = "Today, Twitter is updating embedded Tweets to enable a richer photo experience: <a>https:\/\/t.co\/XdXRudPXH5</a>"
-    expect(parser.parse()).to.eq(parsedBody);
+  
+  it('formats mentions', () => {
+    let text = "We\u2019re excited to work closely with the external technical community and continue @twittereng\u2019s work with open source. cc @TwitterOSS"
+    let transformedText = 'We’re excited to work closely with the external technical community and continue @<a class="tweet-url username" href="https://twitter.com/twittereng" data-screen-name="twittereng" rel="nofollow">twittereng</a>’s work with open source. cc @<a class="tweet-url username" href="https://twitter.com/TwitterOSS" data-screen-name="TwitterOSS" rel="nofollow">TwitterOSS</a>' 
+    expect(FormatTweetEntities.call(text)).to.eq(transformedText);
   });
 
 });
